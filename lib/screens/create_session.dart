@@ -26,25 +26,25 @@ class CreateSession extends StatefulWidget {
 
 class _CreateSessionState extends State<CreateSession> {
 
- // bool user1 = true;
-//  bool user2;
+  bool user1 = true;
+  bool user2;
 
   TextEditingController editingController=new TextEditingController();
 
-  /*@override
+  @override
   void initState(){
     super.initState();
-    FirebaseDatabase.instance.reference()
-                  .child("123456").set({
-              'Connected': false,
-              'User 1': "",
-              'User 2': ""
-              });
+   // FirebaseDatabase.instance.reference()
+    //              .child("123456").set({
+    //          'Connected': false,
+     //         'User 1': "",
+     //         'User 2': ""
+    //          });
       if(user2 == true){
         user1 = false;
       }
         
-  }*/
+  }
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -73,24 +73,32 @@ class _CreateSessionState extends State<CreateSession> {
                     },
                   ),*/
               SizedBox(
+                height: 300,
                 child: GridView.count(
-                primary: false,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-              children: <Widget>[
-                  Container(
-                  padding: const EdgeInsets.all(8),
-                  child: const Text("He'd have you all unravel at the"),
-                  color: Colors.teal[100],
+                  primary: false,
+                  padding: const EdgeInsets.all(10),
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 7,
+                  crossAxisCount: 2,
+                  children: <Widget>[
+                     StreamBuilder(
+                    stream: widget.channel.stream,
+                    builder: (context,snapshot){
+                      return new Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child:  user1 == true ? Text(snapshot.hasData ? '${snapshot.data}' : '',
+                        style: TextStyle(decoration: TextDecoration.none,
+                        color: Colors.black,
+                        fontSize: 10),): Text("user2")
+                        );
+                    },
                   ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Heed not the rabble'),
-                color: Colors.teal[200],
-              ),]
-              ),
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          child: const Text('Heed not the rabble'),
+                          color: Colors.teal[200],
+                        ),]
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

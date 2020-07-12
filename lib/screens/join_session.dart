@@ -9,7 +9,7 @@ class JoinSession extends StatefulWidget {
 
 class _JoinSessionState extends State<JoinSession> {
   
-  bool user2 = true;
+  bool user2 ;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,9 @@ class _JoinSessionState extends State<JoinSession> {
          RaisedButton(
            child: Text("JOIN"),
            onPressed: (){
+             setState(() {
+               user2=true;
+             });
              Navigator.push(context,
                  MaterialPageRoute(builder: (context) => CreateSession(
                    channel: new IOWebSocketChannel.connect("wss://echo.websocket.org")
