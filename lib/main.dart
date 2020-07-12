@@ -1,6 +1,7 @@
 import 'package:chatapp/screens/create_session.dart';
 import 'package:chatapp/screens/join_session.dart';
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/io.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.grey,
-      ),
+     primarySwatch: Colors.blueGrey ),
       home: HomePage(),
     );
   }
@@ -29,41 +29,45 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("App Name",
+        title: Text("T.A.R.D.I.S",
         style: TextStyle(
-          color: Colors.blue,
-          fontSize: 20,fontWeight: FontWeight.bold),),
+          color: Colors.black,
+          fontSize: 25,fontWeight: FontWeight.bold),),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              child: Text("CREATE SESSION", 
-              style: TextStyle(color: Colors.blue,fontSize: 20,
-              fontWeight: FontWeight.bold,
-              ),
-              ),
-              padding: EdgeInsets.all(1),
-              onPressed: () {
-                Navigator.push(context,
-                 MaterialPageRoute(builder: (context) => CreateSession()));
-                 }
-              ),
-            Padding(padding: EdgeInsets.all(5)),
-            RaisedButton(
-              child: Text("JOIN SESSION", 
-              style: TextStyle(color: Colors.blue,fontSize: 20,fontWeight: FontWeight.bold,
-              ),
-              ),
-              padding: EdgeInsets.all(7),
-               onPressed: () {
-                Navigator.push(context,
-                 MaterialPageRoute(builder: (context) => JoinSession()));
-                 },)
-          ],
-          ),
-      ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              RaisedButton(
+                color: Colors.blueGrey,
+                child: Text("CREATE SESSION", 
+                style: TextStyle(color: Colors.black,fontSize: 20,
+                fontWeight: FontWeight.bold,
+                ),
+                ),
+                padding: EdgeInsets.all(4),
+                onPressed: () {
+                  Navigator.push(context,
+                   MaterialPageRoute(builder: (context) => CreateSession(
+                     channel: new IOWebSocketChannel.connect("wss://echo.websocket.org")
+                   )));
+                   }
+                ),
+              Padding(padding: EdgeInsets.all(5)),
+              RaisedButton(
+                color: Colors.blueGrey,
+                child: Text("JOIN SESSION", 
+                style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold,
+                ),
+                ),
+                padding: EdgeInsets.only(left: 15,right: 15),
+                 onPressed: () {
+                  Navigator.push(context,
+                   MaterialPageRoute(builder: (context) => JoinSession()));
+                   },)
+            ],
+            ),
+        ),
     );
   }
 }
