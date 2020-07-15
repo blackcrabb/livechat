@@ -25,6 +25,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  bool user2 = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(context,
                    MaterialPageRoute(builder: (context) => CreateSession(
-                     channel: new IOWebSocketChannel.connect("wss://echo.websocket.org")
+                     channel: new IOWebSocketChannel.connect("wss://echo.websocket.org"),
                    )));
                    }
                 ),
@@ -63,7 +65,9 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(left: 15,right: 15),
                  onPressed: () {
                   Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => JoinSession()));
+                   MaterialPageRoute(builder: (context) => JoinSession(
+                     user2: user2
+                   )));
                    },)
             ],
             ),

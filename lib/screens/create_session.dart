@@ -26,8 +26,7 @@ class CreateSession extends StatefulWidget {
 
 class _CreateSessionState extends State<CreateSession> {
 
-  bool user1 = true;
-  bool user2;
+  bool user1 =true , user2;
 
   TextEditingController editingController=new TextEditingController();
 
@@ -62,7 +61,7 @@ class _CreateSessionState extends State<CreateSession> {
                   fontSize: 25),)
                 ],
               ),
-               /* StreamBuilder(
+                StreamBuilder(
                     stream: widget.channel.stream,
                     builder: (context,snapshot){
                       return new Padding(
@@ -71,35 +70,7 @@ class _CreateSessionState extends State<CreateSession> {
                         style: TextStyle(decoration: TextDecoration.none,color: Colors.black),),
                         );
                     },
-                  ),*/
-              SizedBox(
-                height: 300,
-                child: GridView.count(
-                  primary: false,
-                  padding: const EdgeInsets.all(10),
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 7,
-                  crossAxisCount: 2,
-                  children: <Widget>[
-                     StreamBuilder(
-                    stream: widget.channel.stream,
-                    builder: (context,snapshot){
-                      return new Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child:  user1 == true ? Text(snapshot.hasData ? '${snapshot.data}' : '',
-                        style: TextStyle(decoration: TextDecoration.none,
-                        color: Colors.black,
-                        fontSize: 10),): Text("user2")
-                        );
-                    },
                   ),
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          child: const Text('Heed not the rabble'),
-                          color: Colors.teal[200],
-                        ),]
-                ),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -109,8 +80,10 @@ class _CreateSessionState extends State<CreateSession> {
                       child: TextField(
                   decoration:  InputDecoration(labelText: "Send a message",),  
                  controller: editingController,
-                 /*onChanged: (text) {
-                if(user1){
+                 onChanged: (text) {
+                  
+                 }
+                /*if(user1){
                   FirebaseDatabase.instance.reference()
                   .child("123456").set({
                   'Text user 1': text,

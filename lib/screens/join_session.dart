@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
 import 'create_session.dart';
 
+// ignore: must_be_immutable
 class JoinSession extends StatefulWidget {
+
+   bool user2 ;
+   JoinSession( {this.user2});
   @override
   _JoinSessionState createState() => _JoinSessionState();
 }
 
 class _JoinSessionState extends State<JoinSession> {
   
-  bool user2 ;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,9 +33,6 @@ class _JoinSessionState extends State<JoinSession> {
          RaisedButton(
            child: Text("JOIN"),
            onPressed: (){
-             setState(() {
-               user2=true;
-             });
              Navigator.push(context,
                  MaterialPageRoute(builder: (context) => CreateSession(
                    channel: new IOWebSocketChannel.connect("wss://echo.websocket.org")
